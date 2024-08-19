@@ -1,6 +1,5 @@
 package io.p4r53c.telran.stream;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class StreamTasks {
@@ -27,15 +26,17 @@ public class StreamTasks {
      * probably a bit of a cheat for this task, so I decided to do an explicit
      * random sort. In my opinion, this code is shorter and clearer.
      * 
+     * All of the above methods is incorrect, lol :D
      *
      * @param array the array of integers to be shuffled
      * @return the shuffled array of integers
      */
     public static int[] shuffle(int[] array) {
-        return Arrays.stream(array)
-                .boxed()
-                .sorted((a, b) -> random.nextInt(3) - 1)
-                .mapToInt(Integer::intValue)
-                .toArray();
+        return array.length == 0 ? array
+                : random.ints(0, array.length)
+                        .distinct()
+                        .limit(array.length)
+                        .map(i -> array[i])
+                        .toArray();
     }
 }

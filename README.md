@@ -1,4 +1,4 @@
-# Range
+# Stream API
 
 1. Stream Operations
 

@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 class StreamTasksTest {
 
-    private int[] array = {1, 2, 3, 4, 5};
+    private int[] array = { 1, 2, 3, 4, 5 };
 
     @Test
     void testShuffle() {
@@ -22,14 +22,19 @@ class StreamTasksTest {
         assertEquals(array.length, shuffled.length);
     }
 
-    //Verifies that every element in the shuffled array is present in the original array.
+    // Verifies that every element in the shuffled array is present in the original
+    // array.
     @Test
     void testShuffleVerifyElements() {
         int[] shuffled = StreamTasks.shuffle(array);
         assertTrue(Arrays.stream(shuffled).allMatch(x -> Arrays.stream(array).anyMatch(y -> y == x)));
     }
 
-   
+    @Test
+    void testShuffleNoDuplicates() {
+        int[] shuffled = StreamTasks.shuffle(array);
+        assertEquals(array.length, Arrays.stream(shuffled).distinct().count());
+    }
 
     @Test
     void testShuffleMultipleCalls() {
@@ -47,7 +52,7 @@ class StreamTasksTest {
 
     @Test
     void testShuffleSingleElementArray() {
-        int[] singleElementArray = {1};
+        int[] singleElementArray = { 1 };
         int[] shuffled = StreamTasks.shuffle(singleElementArray);
         assertEquals(singleElementArray.length, shuffled.length);
         assertEquals(singleElementArray[0], shuffled[0]);
